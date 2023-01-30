@@ -10,7 +10,7 @@ defmodule Identicon do
     %Identicon.Image{hex: hex} = image
 
     hex
-    |> Enum.chunk_every(3)
+    |> Enum.chunk_every(3, 3, :discard)
     |> Enum.map(&mirror_row/1)
   end
 
@@ -19,14 +19,8 @@ defmodule Identicon do
     row ++ [second, first]
   end
 
-  def pick_color(image) do
-    # this line here is acknowledging that there are more
-    # elements in the list but we don't actually care about them !
-    %Identicon.Image{hex: [r, g, b | _tail]} = image
+  def pick_color(%Identicon.Image{hex: [r, g, b | _tail]} = image) do
     %Identicon.Image{image | color: {r, g, b}}
-
-    # return rgb
-    [r, g, b]
   end
 
   def hash_input(input) do
