@@ -2,6 +2,7 @@ defmodule Identicon do
   @moduledoc """
    Functions and methods to generate an *Identicon* and save it on your drive.
   """
+
   def main(input) do
     input
     |> hash_input()
@@ -13,6 +14,7 @@ defmodule Identicon do
     |> save_image(input)
   end
 
+  # Saves image on path
   def save_image(image, input) do
     File.write("#{input}.png", image)
   end
